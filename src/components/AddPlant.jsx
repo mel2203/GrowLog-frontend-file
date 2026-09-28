@@ -9,6 +9,7 @@ export default function AddPlant({ users, categories, onAdded }) {
   const [instructions, setInstructions] = useState("");
   const [authorId, setAuthorId] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   //prevents refresh when they submit the new plant info
   async function handleSubmit(event) {
@@ -69,7 +70,11 @@ export default function AddPlant({ users, categories, onAdded }) {
           value={instructions}
           onChange={(event) => setInstructions(event.target.value)}
         />
-
+        <input
+          placeholder="Image link (optional)"
+          value={imageUrl}
+          onChange={(event) => setImageUrl(event.target.value)}
+        />
         <select
           value={authorId}
           onChange={(event) => setAuthorId(event.target.value)}
