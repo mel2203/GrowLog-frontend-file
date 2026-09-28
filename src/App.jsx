@@ -1,202 +1,64 @@
 import { useEffect, useState } from "react";
+import { API } from "./api";
+import Plants from "./components/Plants";
+import AddPlant from "./components/AddPlant";
+import Users from "./components/Users";
+import AddUser from "./components/AddUser";
+import Categories from "./components/Categories";
+//created different files for each component for react
 
-// Replace these URLs with your own API endpoints
-const API = {
-  recipes: "https://your-api.com/recipes",
-  recipeById: "https://your-api.com/recipes/1",
-  createRecipe: "https://your-api.com/recipes",
+//state for what to show (default is empty for now)
+//State is the variable that makes the screen update when it changes.
+function App() {
+  const [plants, setPlants] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  users: "https://your-api.com/users",
-  createUser: "https://your-api.com/users",
+  //creates the places where the page keeps its data,
+  //defines the three functions we need
 
-  categories: "https://your-api.com/categories",
-};
+  //fetch -> place the order (using the URL we put in api.js)
+  // then response -> when the answer arrives, do this.
+  //The result of the previous step is passed in as data, so data is that array.
+  //can also use async/await !!
 
-function Recipes() {
-  const [recipes, setRecipes] = useState([]);
-
-  useEffect(() => {
-    fetch(API.recipes)
+  function loadPlants() {
+    fetch(API.plants)
       .then((response) => response.json())
-      .then((data) => setRecipes(data));
-  }, []);
-
-  return (
-    <section>
-      <h2>Recipes</h2>
-
-      {recipes.map((recipe) => (
-        <article key={recipe.id}>
-          <h3>{recipe.name}</h3>
-          <p>{recipe.ingredients}</p>
-          <p>{recipe.instructions}</p>
-          <small>
-            Author: {recipe.author} | Category: {recipe.category}
-          </small>
-        </article>
-      ))}
-    </section>
-  );
-}
-
-function AddRecipe() {
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    await fetch(API.createRecipe, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        ingredients,
-        instructions,
-      }),
-    });
-
-    setName("");
-    setIngredients("");
-    setInstructions("");
-
-    alert("Recipe added!");
+      .then((data) => setPlants(data));
   }
 
-  return (
-    <section>
-      <h2>Add Recipe</h2>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Recipe name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-
-        <textarea
-          placeholder="Ingredients"
-          value={ingredients}
-          onChange={(event) => setIngredients(event.target.value)}
-        />
-
-        <textarea
-          placeholder="Instructions"
-          value={instructions}
-          onChange={(event) => setInstructions(event.target.value)}
-        />
-
-        <button type="submit">Add Recipe</button>
-      </form>
-    </section>
-  );
-}
-
-function Users() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
+  function loadUsers() {
     fetch(API.users)
       .then((response) => response.json())
       .then((data) => setUsers(data));
-  }, []);
-
-  return (
-    <section>
-      <h2>Users</h2>
-
-      {users.map((user) => (
-        <p key={user.id}>
-          {user.name} - {user.email}
-        </p>
-      ))}
-    </section>
-  );
-}
-
-function AddUser() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    await fetch(API.createUser, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-      }),
-    });
-
-    setName("");
-    setEmail("");
-
-    alert("User added!");
   }
 
-  return (
-    <section>
-      <h2>Add User</h2>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-
-        <button type="submit">Add User</button>
-      </form>
-    </section>
-  );
-}
-
-function Categories() {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
+  function loadCategories() {
     fetch(API.categories)
       .then((response) => response.json())
       .then((data) => setCategories(data));
+  }
+
+  // Runs once when the page first loads
+  useEffect(() => {
+    loadPlants();
+    loadUsers();
+    loadCategories();
   }, []);
 
   return (
-    <section>
-      <h2>Categories</h2>
-
-      {categories.map((category) => (
-        <p key={category.id}>{category.name}</p>
-      ))}
-    </section>
-  );
-}
-
-function App() {
-  return (
     <main>
-      <h1>KitchenBase</h1>
-      <p>A simple recipe collection.</p>
+      <h1>GrowLog</h1>
+      <p>A plant care collection shared by gardeners.</p>
 
-      <Recipes />
-      <AddRecipe />
+      <Plants plants={plants} />
+      <AddPlant users={users} categories={categories} onAdded={loadPlants} />
 
-      <Users />
-      <AddUser />
+      <Users users={users} />
+      <AddUser onAdded={loadUsers} />
 
-      <Categories />
+      <Categories categories={categories} />
     </main>
   );
 }
