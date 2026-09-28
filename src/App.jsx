@@ -56,7 +56,7 @@ function App() {
 
             <img
               className="logo-mark"
-              src="growlog.png"
+              src="/growlog.png"
               alt="GrowLog sapling logo"
             />
             <h1>GrowLog</h1>
@@ -75,8 +75,6 @@ function App() {
             categories={categories}
             onAdded={loadPlants}
           />
-
-          <Users users={users} />
           <AddUser onAdded={loadUsers} />
         </div>
         <div className="lists">
