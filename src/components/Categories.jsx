@@ -5,9 +5,17 @@ export default function Categories({ categories }) {
     <section>
       <h2>Categories</h2>
 
-      {categories.map((category) => (
-        <p key={category.id}>{category.name}</p>
-      ))}
+      <div className="chips">
+        {categories.map((category) => (
+          <span
+            key={category.id}
+            className="badge"
+            data-category={category.name}
+          >
+            {category.name}
+          </span>
+        ))}
+      </div>
     </section>
   );
 }

@@ -3,17 +3,23 @@ export default function Plants({ plants }) {
   return (
     <section>
       <h2>Plants</h2>
+
       {/*  Display component for the plants and their infu */}
-      {plants.map((plant) => (
-        <article key={plant.id}>
-          <h3>{plant.name}</h3>
-          <p>{plant.care_needs}</p>
-          <p>{plant.instructions}</p>
-          <small>
-            Author: {plant.author} | Category: {plant.category}
-          </small>
-        </article>
-      ))}
+      <div className="plant-grid">
+        {plants.map((plant) => (
+          <article
+            key={plant.id}
+            className="plant-card"
+            data-category={plant.category}
+          >
+            <span className="badge">{plant.category}</span>
+            <h3>{plant.name}</h3>
+            <p className="care">{plant.care_needs}</p>
+            <p>{plant.instructions}</p>
+            <small>Written by {plant.author}</small>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

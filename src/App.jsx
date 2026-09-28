@@ -48,18 +48,43 @@ function App() {
   }, []);
 
   return (
-    <main>
-      <h1>GrowLog</h1>
-      <p>A plant care collection shared by gardeners.</p>
+    <>
+      <header className="site-header">
+        <div className="header-inner">
+          <div className="brand">
+            {/* The GrowLog logo: two leaves growing from one stem */}
 
-      <Plants plants={plants} />
-      <AddPlant users={users} categories={categories} onAdded={loadPlants} />
+            <img
+              className="logo-mark"
+              src="growlog.png"
+              alt="GrowLog sapling logo"
+            />
+            <h1>GrowLog</h1>
+          </div>
+          <p className="tagline">
+            A plant care collection shared by gardeners.
+          </p>
+        </div>
+      </header>
 
-      <Users users={users} />
-      <AddUser onAdded={loadUsers} />
+      <main className="page">
+        <Plants plants={plants} />
+        <div className="forms">
+          <AddPlant
+            users={users}
+            categories={categories}
+            onAdded={loadPlants}
+          />
 
-      <Categories categories={categories} />
-    </main>
+          <Users users={users} />
+          <AddUser onAdded={loadUsers} />
+        </div>
+        <div className="lists">
+          <Users users={users} />
+          <Categories categories={categories} />
+        </div>
+      </main>
+    </>
   );
 }
 

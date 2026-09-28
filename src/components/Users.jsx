@@ -4,10 +4,13 @@ export default function Users({ users }) {
   return (
     <section>
       <h2>Gardeners</h2>
-
-      {users.map((user) => (
-        <p key={user.id}>{user.username}</p>
-      ))}
+      <div className="chips">
+        {users.map((user) => (
+          <span key={user.id} className="chip">
+            {user.username}
+          </span>
+        ))}
+      </div>
     </section>
   );
 }
