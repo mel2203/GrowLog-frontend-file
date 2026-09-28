@@ -12,6 +12,15 @@ export default function Plants({ plants }) {
             className="plant-card"
             data-category={plant.category}
           >
+            {plant.image_url && (
+              <img
+                className="plant-photo"
+                src={plant.image_url}
+                alt={plant.name}
+                loading="lazy"
+              />
+            )}
+
             <span className="badge">{plant.category}</span>
             <h3>{plant.name}</h3>
             <p className="care">{plant.care_needs}</p>
