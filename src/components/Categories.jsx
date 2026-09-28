@@ -1,5 +1,6 @@
 //same as users
-function Categories({ categories }) {
+
+export default function Categories({ categories }) {
   return (
     <section>
       <h2>Categories</h2>

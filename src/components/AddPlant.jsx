@@ -1,7 +1,9 @@
-//add plant component
+import { useState } from "react";
+import { API } from "../api";
 
+//add plant component
 //if users wanna add new plants, use usestate
-function AddPlant({ users, categories, onAdded }) {
+export default function AddPlant({ users, categories, onAdded }) {
   const [name, setName] = useState("");
   const [careNeeds, setCareNeeds] = useState("");
   const [instructions, setInstructions] = useState("");

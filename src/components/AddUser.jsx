@@ -1,4 +1,7 @@
-function AddUser({ onAdded }) {
+import { useState } from "react";
+import { API } from "../api";
+
+export default function AddUser({ onAdded }) {
   const [username, setUsername] = useState("");
 
   async function handleSubmit(event) {
