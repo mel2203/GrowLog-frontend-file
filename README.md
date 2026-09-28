@@ -7,7 +7,7 @@ Unleash your inner botanist. Browse care tips for succulents, herbs, flowers and
 This is the **frontend** of GrowLog, built with React. It talks to the GrowLog API (see the backend repo).
  
 ## 🔗 Links
- 
+ | | |
 |---|---|
 | 🌍 Live site | https://growlog-xi.vercel.app/ |
 | ⚙️ Live API | growlog-backend-file-production.up.railway.app |
